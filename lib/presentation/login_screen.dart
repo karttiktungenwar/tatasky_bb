@@ -22,11 +22,9 @@ class _LoginScreenPageViewState extends State<LoginScreenPageView> {
   bool _isValid = false;
 
   @override
-  Future<void> initState() async {
+  void initState()  {
     // TODO: implement initState
     super.initState();
-    WidgetsFlutterBinding.ensureInitialized();
-    await setupServiceLocator();
     _controller.addListener((){
       setState(() {
         _isValid = _controller.text.length == 10;

@@ -5,6 +5,7 @@ import 'package:tatasky_bb/presentation/login_screen.dart';
 
 import 'core/di/service_locator.dart';
 import 'core/storage/shared_prefs_service.dart';
+import 'constants/app_constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +37,7 @@ class _LiquidGlassPageViewState extends State<LiquidGlassPageView> {
   final PageController _pageController = PageController();
   final int _numPages = 3;
   int _currentPage = 0;
-  late bool? value = prefs.getBool("your_key");
+  late bool? value = prefs.getBool(APIConstants.is_login);
 
   List<String> images = [
     'assets/image/onboard_screen_01.png',
