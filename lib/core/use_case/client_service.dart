@@ -18,17 +18,19 @@ final class ClientService {
       final String entityId = "1";
       final String versionCode = "552";
       final String userNumber = getUserNumber;
-      final String syncCheck= true as String;
+      final String syncCheck = true as String;
+      final String apiType = "REST";
       return req = User(
-        deviceModel: deviceModel,
-        version: version,
-        checkVersion: checkVersion,
-        client: client,
-        syncDate: syncDate,
-        entityId: entityId,
-        versionCode: versionCode,
-        userNumber: userNumber,
-        syncCheck: syncCheck
+          deviceModel: deviceModel,
+          version: version,
+          checkVersion: checkVersion,
+          client: client,
+          syncDate: syncDate,
+          entityId: entityId,
+          versionCode: versionCode,
+          userNumber: userNumber,
+          syncCheck: syncCheck,
+          apiType:apiType
       );
 
 

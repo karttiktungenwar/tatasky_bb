@@ -8,6 +8,7 @@ final class User {
   final String versionCode;
   final String userNumber;
   final String syncCheck;
+  final String apiType;
 
   User({
     required this.deviceModel,
@@ -18,7 +19,8 @@ final class User {
     required this.entityId,
     required  this.versionCode,
     required this.userNumber,
-    required this.syncCheck});
+    required this.syncCheck,
+    required this.apiType});
 
   factory User.fromJson(Map<String, dynamic> json) => User(
       deviceModel : json['deviceModel'] as String,
@@ -29,7 +31,8 @@ final class User {
       entityId : json['entityId'] as String,
       versionCode : json['versionCode'] as String,
       userNumber : json['userNumber'] as String,
-      syncCheck : json['syncCheck'] as String
+      syncCheck : json['syncCheck'] as String,
+      apiType : json['APIType'] as String,
   );
 
   Map<String, dynamic> toJson() => <String, dynamic>{
@@ -42,5 +45,6 @@ final class User {
     'versionCode' : versionCode ,
     'userNumber' : userNumber ,
     'syncCheck' : syncCheck ,
+    'APIType' : apiType ,
   };
 }
