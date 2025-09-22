@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../core/di/service_locator.dart';
-
+import '../core/network/retrofit_client.dart';
 
 class LoginScreen extends StatelessWidget{
   const LoginScreen({super.key});
@@ -20,6 +20,10 @@ class LoginScreenPageView extends StatefulWidget {
 class _LoginScreenPageViewState extends State<LoginScreenPageView> {
   final TextEditingController _controller = TextEditingController();
   bool _isValid = false;
+  final config = getIt<ConfigService>();
+  late final baseUrl = config.baseUrl; // Gets debug/prod URL automatically
+  late final retrofitClient = getIt<RetrofitClient>(param1: baseUrl);
+  late final userNumber = _controller.text.trim();
 
   @override
   void initState()  {
