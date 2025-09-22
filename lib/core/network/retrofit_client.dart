@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 
 import '../../data/model/request/login_request.dart';
 import '../../data/model/response/login_response.dart';
+import '../../data/model/response/login_verify_response.dart';
 
 
 part 'retrofit_client.g.dart';
@@ -17,5 +18,8 @@ abstract class RetrofitClient {
   // Add other API calls here
   @POST("/tatasky-boradband-integration-server-preprod-rmn-olt-verbiage/api/")
   Future<LoginResponse> getLogin(@Body() LoginRequest request);
+
+  @POST("/tatasky-boradband-integration-server-preprod-rmn-olt-verbiage/api/")
+  Future<LoginVerifyResponse> getLoginVerify(@Body() LoginVerifyRequest);
 
 }

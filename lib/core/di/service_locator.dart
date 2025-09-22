@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart'; // For kDebugMode
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tatasky_bb/data/services/api_service.dart';
 import '../network/dio_client.dart';
 import '../network/retrofit_client.dart';
 import '../storage/shared_prefs_service.dart';
@@ -50,4 +51,16 @@ Future<void> setupServiceLocator() async {
     dio.options.baseUrl = baseUrl; // Set base URL dynamically here
     return RetrofitClient(dio);
   });
+
+  // Register ConfigService as a singleton or lazy singleton
+  getIt.registerLazySingleton<ConfigService>(() => ConfigService());
+
+  // In setupServiceLocator(), after registering RetrofitClient
+  getIt.registerLazySingleton<APIService>(() {
+    final config = getIt<ConfigService>();
+    final baseUrl = config.baseUrl;  // Automatically selects debug or prod
+    final retrofitClient = getIt<RetrofitClient>(param1: baseUrl);
+    return APIService(retrofitClient);
+  });
+
 }

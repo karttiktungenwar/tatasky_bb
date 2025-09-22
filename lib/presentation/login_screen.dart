@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tatasky_bb/data/services/api_service.dart';
 
 import '../core/di/service_locator.dart';
-import '../core/network/retrofit_client.dart';
 
 class LoginScreen extends StatelessWidget{
   const LoginScreen({super.key});
@@ -20,9 +20,7 @@ class LoginScreenPageView extends StatefulWidget {
 class _LoginScreenPageViewState extends State<LoginScreenPageView> {
   final TextEditingController _controller = TextEditingController();
   bool _isValid = false;
-  final config = getIt<ConfigService>();
-  late final baseUrl = config.baseUrl; // Gets debug/prod URL automatically
-  late final retrofitClient = getIt<RetrofitClient>(param1: baseUrl);
+  bool _isLoading = false; // Added: Loading state declaration
   late final userNumber = _controller.text.trim();
 
   @override
@@ -34,6 +32,51 @@ class _LoginScreenPageViewState extends State<LoginScreenPageView> {
         _isValid = _controller.text.length == 10;
       });
     });
+  }
+
+  Future<void> _sendOtp() async {
+    setState(() {
+      _isLoading = true;
+    });
+    // Show loading dialog
+
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Prevent dismiss by tapping outside
+      builder: (context) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+
+    try {
+      // Get OtpService from GetIt
+      final apiService = getIt<APIService>();
+      // Call sendOtp - it handles ClientService and API internally
+      final response = await apiService.sendOtp(userNumber);
+
+      // Handle success
+      final status = response.status;
+      final message = response.message;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(message ?? 'OTP sent successfully!')),
+      );
+
+      // TODO: Navigate to OTP verification screen, pass resendTimer/dsaCode/userNumber
+      // Navigator.push(context, MaterialPageRoute(builder: (_) => OtpScreen(userNumber: userNumber)));
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: ${e.toString()}')),
+      );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+      // Dismiss the loading dialog
+      Navigator.of(context).pop();
+    }
   }
 
   @override
@@ -87,9 +130,7 @@ class _LoginScreenPageViewState extends State<LoginScreenPageView> {
                   // Send OTP button
                   ElevatedButton(
                     onPressed: _isValid
-                        ? () {
-                      // Your OTP send logic here
-                    }
+                        ? _sendOtp
                         : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor:

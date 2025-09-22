@@ -47,6 +47,33 @@ class _RetrofitClient implements RetrofitClient {
     return _value;
   }
 
+  @override
+  Future<LoginVerifyResponse> getLoginVerify(dynamic LoginVerifyRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = LoginVerifyRequest;
+    final _options = _setStreamType<LoginVerifyResponse>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/tatasky-boradband-integration-server-preprod-rmn-olt-verbiage/api/',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late LoginVerifyResponse _value;
+    try {
+      _value = LoginVerifyResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

@@ -12,7 +12,7 @@ LoginRequest _$LoginRequestFromJson(Map<String, dynamic> json) => LoginRequest(
   type: json['type'] as String,
   queryParameterMap: json['queryParameterMap'] as Map<String, dynamic>,
   data: (json['data'] as List<dynamic>)
-      .map((e) => Map<String, String>.from(e as Map))
+      .map((e) => DataItem.fromJson(e as Map<String, dynamic>))
       .toList(),
   action: json['action'] as String,
 );
