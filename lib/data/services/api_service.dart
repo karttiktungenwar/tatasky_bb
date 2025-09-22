@@ -8,7 +8,6 @@ class APIService{
   APIService(this._retrofitClient);
 
   /// Sends OTP using the provided userNumber
-
   Future<LoginResponse> sendOtp(String userNumber) async {
     try {
       // Get User from ClientService (includes device/platform info)

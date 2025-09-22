@@ -57,7 +57,6 @@ class _LoginScreenPageViewState extends State<LoginScreenPageView> {
       final response = await apiService.sendOtp(userNumber);
 
       // Handle success
-      final status = response.status;
       final message = response.message;
 
       ScaffoldMessenger.of(context).showSnackBar(
