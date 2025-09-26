@@ -91,7 +91,7 @@ class _MapScreenActivityState extends State<MapScreenActivity> {
                   },
           ),
 
-          // search
+          // search area
           SafeArea(
             child: Container(
               margin: const EdgeInsets.all(12),
