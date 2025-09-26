@@ -47,6 +47,13 @@ dependencies:
   path: ^1.8.3
   shared_preferences: ^2.5.3
   smooth_page_indicator: ^1.0.0  # For page indicators
+  google_maps_flutter: ^2.9.0
+  geocoding: ^2.1.0
+  flutter_google_places: ^0.3.0
+
+dependency_overrides:
+  google_api_headers: ^4.2.0
+
 
 dev_dependencies:
   flutter_test:

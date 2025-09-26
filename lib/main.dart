@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tatasky_bb/presentation/dashboard_home.dart';
+import 'package:tatasky_bb/presentation/home_screen.dart';
 import 'package:tatasky_bb/presentation/login_screen.dart';
 
 import 'core/di/service_locator.dart';
@@ -49,12 +50,12 @@ class _LiquidGlassPageViewState extends State<LiquidGlassPageView> {
     if(value = true){
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => LoginScreen()),
+        MaterialPageRoute(builder: (context) => HomeScreen()),
       );
     }else{
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => LoginScreen()),
+        MaterialPageRoute(builder: (context) => HomeScreen()),
       );
     }
   }
@@ -70,12 +71,12 @@ class _LiquidGlassPageViewState extends State<LiquidGlassPageView> {
       if(value = true){
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => LoginScreen()),
+          MaterialPageRoute(builder: (context) => HomeScreen() /*LoginScreen())*/),
         );
       }else{
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => LoginScreen()),
+          MaterialPageRoute(builder: (context) => HomeScreen()/* LoginScreen()*/),
         );
       }
     }
